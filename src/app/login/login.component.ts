@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
    * @param formData the data from the loginForm
    */
   private _getPlayer(formData: Player) {
-    if (this.existingUser) {
+    if (this.existingUser.value) {
       this._playersService.getPlayer(formData)
       .subscribe((player: Player) => {
         this.players.push(player);
