@@ -1,5 +1,5 @@
 
-<h1>Bienvenido Usuario #{{playersId.length + 1}}</h1>
+<h1>Bienvenido Usuario #{{playerNumber}}</h1>
 
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
   <input formControlName="firstName">
@@ -7,3 +7,9 @@
   <input type="checkbox" formControlName="createdUser">
   <button type="submit" [disabled]="loginForm.pristine">{{!existingUser.value ? 'Create' : 'Login'}}</button>
 </form>
+
+<ul>
+  <li *ngFor="let tutorial of players | async">
+    <a href="#" target="_blank">{{ tutorial.firstName }}</a>
+  </li>
+</ul>
