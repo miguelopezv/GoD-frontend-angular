@@ -1,3 +1,19 @@
-<p>
-  game works!
-</p>
+
+
+<div *ngIf="!winner; else winner_template">
+  <h3>Player {{values.length +1}}</h3>
+  <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
+    <input formControlName="id" type="hidden" value="1">
+    <select class="form-control" formControlName="option">
+      <option *ngFor="let option of options; let i = index;" value="{{i + 1}}">
+        {{option}}
+      </option>
+    </select>
+    <button type="submit" [disabled]="gameForm.pristine">Submit</button>
+  </form>
+</div>
+<ng-template #winner_template>
+  <h3>Winner is...{{winner.fullName}}</h3>
+  <button (click)="resetAndSave()">Play again</button>
+</ng-template>
+<a href="stats">Stats</a>
