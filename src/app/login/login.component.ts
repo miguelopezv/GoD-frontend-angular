@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  players: Player[];
+  // player: Player;
+  players: Player[] = [];
   playersId: number[] = [];
   loginForm: FormGroup;
   existingUser: AbstractControl;
@@ -21,31 +22,48 @@ export class LoginComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.loginForm = this.createFormGroup();
+    this.loginForm = this._createFormGroup();
     this.existingUser = this.loginForm.controls['createdUser'];
-    this.getPairPlayers(this.playersId);
   }
 
-  getPairPlayers(playersId: number[]) {
-    this._playersService
-      .getPlayers(playersId)
-      .subscribe((players: Player[]) => (this.players = players));
+  /**
+   * Submit the data from the form
+   */
+  onSubmit() {
+    this._getPlayer(this.loginForm.value);
+
+    this.loginForm.reset();
+    if (this.playersId.length === 2) { this._router.navigateByUrl('/game'); }
   }
 
-  createFormGroup() {
+  /**
+   * Retrieves or saves an user from the Database
+   * @param formData the data from the loginForm
+   */
+  private _getPlayer(formData: Player) {
+    if (this.existingUser) {
+      this._playersService.getPlayer(formData)
+      .subscribe((player: Player) => {
+        this.players.push(player);
+        this.playersId.push(player.id);
+      });
+    } else {
+      this._playersService.createPlayer(formData)
+      .subscribe((player: Player) => {
+        this.players.push(player);
+        this.playersId.push(player.id);
+      });
+    }
+  }
+
+  /**
+   * Creates the Form Group to control the form
+   */
+  private _createFormGroup() {
     return new FormGroup({
       firstName: new FormControl(),
       lastName: new FormControl(),
       createdUser: new FormControl()
     });
-  }
-
-  onSubmit() {
-    console.log(this.loginForm.value);
-    this.playersId.push(1);
-    if (this.playersId.length === 2) {
-      this._router.navigateByUrl('/game');
-    }
-    this.loginForm.reset();
   }
 }
