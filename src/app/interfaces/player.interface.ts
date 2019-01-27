@@ -5,4 +5,5 @@ export class Player {
   fullName?: string;
   wonMatches: Array<any>;
   losedMatches: Array<any>;
+  partials: number;
 }
