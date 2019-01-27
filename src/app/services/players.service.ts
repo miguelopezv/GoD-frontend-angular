@@ -23,6 +23,7 @@ export class PlayersService {
     return this._http.get<Player>(`${BACKEND_URL}/player`, { params: params })
     .pipe(tap((data: Player) => {
       data.fullName = `${data.firstName} ${data.lastName}`;
+      data.partials = 0;
       return data;
     }));
   }
