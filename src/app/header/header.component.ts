@@ -18,7 +18,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     const playersObservable = this.store.select('playerFeature');
-    playersObservable.subscribe(players => this.players = players);
+    playersObservable.subscribe(players => {
+      this.players = Object.values(players.entities);
+    });
   }
 
 }
