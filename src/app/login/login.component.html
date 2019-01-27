@@ -7,9 +7,3 @@
   <input type="checkbox" formControlName="createdUser">
   <button type="submit" [disabled]="loginForm.pristine">{{!existingUser.value ? 'Create' : 'Login'}}</button>
 </form>
-
-<ul>
-  <li *ngFor="let tutorial of players | async">
-    <a href="#" target="_blank">{{ tutorial.firstName }}</a>
-  </li>
-</ul>
