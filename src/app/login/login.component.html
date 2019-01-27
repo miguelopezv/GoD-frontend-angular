@@ -1,3 +1,9 @@
-<p>
-  login works!
-</p>
+
+<h1>Bienvenido Usuario #{{playersId.length + 1}}</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+  <input formControlName="firstName">
+  <input formControlName="lastName">
+  <input type="checkbox" formControlName="createdUser">
+  <button type="submit" [disabled]="loginForm.pristine">{{!existingUser.value ? 'Create' : 'Login'}}</button>
+</form>
