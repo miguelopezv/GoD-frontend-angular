@@ -1,0 +1,54 @@
+.game-container
+  display: flex
+  justify-content: center
+  .box
+    background-color: #fff
+    border-radius: 6px
+    box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1)
+    color: #4a4a4a
+    display: block
+    padding: 1.25rem
+    width: 20%
+    margin-top: 20px
+    small
+      float: right
+    form
+      display: flex
+      align-items: center
+    .select-container
+      display: inline-block
+      max-width: 100%
+      position: relative
+      vertical-align: top
+      width: 75%
+      select
+        width: 90%
+        background-color: #fff
+        border-color: #dbdbdb
+        color: #363636
+        cursor: pointer
+        max-width: 100%
+        -webkit-appearance: none
+        font-size: 1rem
+        line-height: 1.5
+        padding: calc(.375em - 1px) calc(.625em - 1px)
+        outline-style: none
+      &:after
+        border-radius: 2px
+        border-bottom: 3px solid rgb(50, 115, 220)
+        border-left: 3px solid rgb(50, 115, 220)
+        box-sizing: border-box
+        content: " "
+        height: 10px
+        margin-top: -7px
+        position: absolute
+        right: 30px
+        top: 18px
+        transform: matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)
+        transform-origin: 5px 5px
+        width: 10px
+        z-index: 4
+    .winner-container
+      text-align: center
+      .winner
+        font-size: 1.5rem

@@ -4,7 +4,8 @@ import { Streak, Player } from '../interfaces';
 import * as GameOptions from '../shared/options.enum';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Store, State } from '@ngrx/store';
-import * as PlayerActions from '../actions';
+import * as PlayerActions from '../actions/player.actions';
+import * as GameActions from '../actions/game.actions';
 
 @Component({
   selector: 'app-game',
@@ -12,13 +13,13 @@ import * as PlayerActions from '../actions';
   styleUrls: ['./game.component.sass']
 })
 export class GameComponent implements OnInit {
-  streak: Streak;
-  gamePartials = ([] = []);
+  round: number = 1;
+  streaks: Streak[];
   values: number[] = [];
   winner: Player;
-  players: any;
+  players: Player[];
   gameForm: FormGroup;
-  options: any = ['rocks', 'paper', 'scissors'];
+  options: string[] = ['rocks', 'paper', 'scissors'];
 
   constructor(
     private statsService: StatsService,
@@ -27,11 +28,18 @@ export class GameComponent implements OnInit {
 
   ngOnInit() {
     const playersObservable = this.store.select('playerFeature');
+    const gamesObservable = this.store.select('gameFeature');
+
     playersObservable.subscribe(p => {
       this.players = Object.values(p.entities);
     });
+
+    gamesObservable.subscribe(s => {
+      this.streaks = Object.values(s.entities);
+    });
+
     this.gameForm = this._createFormGroup();
-    // this.getPlayersStreak(this.playersId);
+    this._getPlayersStreak(this.players.map(p => p.id));
   }
 
   /**
@@ -39,21 +47,44 @@ export class GameComponent implements OnInit {
    */
   onSubmit() {
     this.values.push(this.gameForm.controls['option'].value);
+    this.gameForm.reset();
+
     if (this.values.length === 2) {
       this._result();
     }
   }
 
+  /**
+   * Function to reset winner, round, partials and persist winner stats on DB and State
+   */
   resetAndSave() {
-    this._dispatchUpdate(0, true);
-    this._dispatchUpdate(1, true);
-    // this.statsService.save
+    this.statsService
+      .saveGame({
+        winnerPlayer: this.winner.id,
+        loserPlayer: this.players[
+          this.players.findIndex(p => p.id !== this.winner.id)
+        ].id
+      })
+      .subscribe();
+
+    this._dispatchUpdatePartials(0, true);
+    this._dispatchUpdatePartials(1, true);
+    this._dispatchUpdateStreak(this.winner.id);
+    this.round = 1;
+    this.winner = undefined;
   }
 
-  getPlayersStreak(playersId: number[]) {
-    this.statsService
-      .getStreak(playersId)
-      .subscribe((streak: Streak) => (this.streak = streak));
+  /**
+   * Returns the global streak between two players and store it
+   * @param playersId the ids from both players to compare
+   */
+  private _getPlayersStreak(playersId: number[]) {
+    this.statsService.getStreak(playersId).subscribe((streak: Streak[]) => {
+      const streakArray = Object.values(streak);
+      streakArray.forEach(element => {
+        this.store.dispatch(new GameActions.AddStreak(element));
+      });
+    });
   }
 
   /**
@@ -73,10 +104,10 @@ export class GameComponent implements OnInit {
     if (+this.values[0] === GameOptions.options.paper) {
       switch (+this.values[1]) {
         case GameOptions.options.scissors:
-          this._dispatchUpdate(1);
+          this._dispatchUpdatePartials(1);
           break;
         case GameOptions.options.rocks:
-          this._dispatchUpdate(0);
+          this._dispatchUpdatePartials(0);
           break;
         default:
           break;
@@ -86,10 +117,10 @@ export class GameComponent implements OnInit {
     if (+this.values[0] === GameOptions.options.rocks) {
       switch (+this.values[1]) {
         case GameOptions.options.paper:
-          this._dispatchUpdate(1);
+          this._dispatchUpdatePartials(1);
           break;
         case GameOptions.options.scissors:
-          this._dispatchUpdate(0);
+          this._dispatchUpdatePartials(0);
           break;
         default:
           break;
@@ -99,10 +130,10 @@ export class GameComponent implements OnInit {
     if (+this.values[0] === GameOptions.options.scissors) {
       switch (+this.values[1]) {
         case GameOptions.options.rocks:
-          this._dispatchUpdate(1);
+          this._dispatchUpdatePartials(1);
           break;
         case GameOptions.options.paper:
-          this._dispatchUpdate(0);
+          this._dispatchUpdatePartials(0);
           break;
         default:
           break;
@@ -113,10 +144,11 @@ export class GameComponent implements OnInit {
   }
 
   /**
-   * Dispatch Action to update player
+   * Dispatch action to update player
    * @param index position of the player on the State
+   * @param resetPartials if partials for specific player should return to zero
    */
-  private _dispatchUpdate(index: number, resetPartials: boolean = false) {
+  private _dispatchUpdatePartials(index: number, resetPartials: boolean = false) {
     const currentPartials: number = !resetPartials ? this.players[index].partials : -1;
     this.store.dispatch(
       new PlayerActions.UpdatePlayer({
@@ -127,13 +159,28 @@ export class GameComponent implements OnInit {
   }
 
   /**
+   * Dispatch actionto update streak
+   * @param id position of the streak to update
+   */
+  private _dispatchUpdateStreak(id: number) {
+    const index = this.streaks.findIndex(s => s.id === id);
+    this.store.dispatch(
+      new GameActions.UpdateStreak({
+        id: id,
+        changes: { wins: this.streaks[index].wins + 1 }
+      })
+    );
+  }
+
+  /**
    * Checks if there's a winner already
    */
   private _checkStatus() {
     this.values = [];
-    this.winner = this.players.filter(p => p.partials === 2);
-    if (this.winner) {
-      this.winner = this.winner[0];
+    const winnerArray = this.players.filter(p => p.partials === 3);
+    if (winnerArray) {
+      this.round++;
+      this.winner = winnerArray[0];
     }
   }
 }

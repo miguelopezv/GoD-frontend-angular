@@ -1,19 +1,27 @@
-
-
-<div *ngIf="!winner; else winner_template">
-  <h3>Player {{values.length +1}}</h3>
-  <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
-    <input formControlName="id" type="hidden" value="1">
-    <select class="form-control" formControlName="option">
-      <option *ngFor="let option of options; let i = index;" value="{{i + 1}}">
-        {{option}}
-      </option>
-    </select>
-    <button type="submit" [disabled]="gameForm.pristine">Submit</button>
-  </form>
+<div class="game-container">
+  <div class="box">
+    <div *ngIf="!winner; else winner_template">
+      <h3>{{players[values.length].firstName}}'s Turn <small>round {{round}}</small></h3>
+      <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" novalidate>
+        <input formControlName="id" type="hidden" value="1">
+        <div class="select-container">
+          <select class="form-control" formControlName="option">
+            <option *ngFor="let option of options; let i = index;" value="{{i + 1}}">
+              {{option}}
+            </option>
+          </select>
+        </div>
+        <button type="submit" [disabled]="gameForm.pristine">Submit</button>
+      </form>
+    </div>
+    <ng-template #winner_template>
+      <div class="winner-container">
+        <h3>We have a winner!!</h3>
+        <h4>Our new Emperor is <p class="winner">⚔️  {{winner.fullName}} ⚔️</p></h4>
+        <button (click)="resetAndSave()">Play again</button>
+      </div>
+    </ng-template>
+  </div>
 </div>
-<ng-template #winner_template>
-  <h3>Winner is...{{winner.fullName}}</h3>
-  <button (click)="resetAndSave()">Play again</button>
-</ng-template>
-<a href="stats">Stats</a>
+
+<app-footer></app-footer>
