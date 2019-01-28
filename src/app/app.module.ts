@@ -7,18 +7,19 @@ import { AppComponent } from './app.component';
 import { StatsComponent } from './stats/stats.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginModule } from './login/login.module';
-
 import { StoreModule, MetaReducer, State, ActionReducerMap } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../environments/environment';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import * as fromPlayer from './reducers/player.reducer';
+import * as fromGame from './reducers/game.reducer';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const metaReducers: MetaReducer<State<any>>[] = !environment.production ? [storeFreeze] : [];
 export const reducers: ActionReducerMap<any> = {
-  player: fromPlayer.playerReducer
+  player: fromPlayer.playerReducer,
+  game: fromGame.gameReducer
 };
 
 @NgModule({
@@ -30,8 +31,8 @@ export const reducers: ActionReducerMap<any> = {
     GameModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FontAwesomeModule,
     StoreModule.forRoot( reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({maxAge: 10})
   ],
   providers: [],
   bootstrap: [AppComponent]
