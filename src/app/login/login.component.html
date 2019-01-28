@@ -1,9 +1,20 @@
+<h1>Welcome Player #{{playerNumber + 1}}</h1>
 
-<h1>Bienvenido Usuario #{{playerNumber}}</h1>
-
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-  <input formControlName="firstName">
-  <input formControlName="lastName">
-  <input type="checkbox" formControlName="createdUser">
-  <button type="submit" [disabled]="loginForm.pristine">{{!existingUser.value ? 'Create' : 'Login'}}</button>
-</form>
+<div class="login-container">
+  <div class="box">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <label class="input-label" for="firstName">First Name</label>
+      <input type="text" id="firstName" formControlName="firstName">
+      <label class="input-label" for="lastName">Last Name</label>
+      <input type="text" id="lastName" formControlName="lastName">
+      <div class="checkbox-container">
+        <input id="checkbox" type="checkbox" formControlName="createdUser">
+        <label for="checkbox">are you already a player?</label>
+      </div>
+      <div class="button-container">
+        <button type="submit" [disabled]="loginForm.pristine">{{!existingUser.value ? 'Create' : 'Login'}}</button>
+      </div>
+    </form>
+    <small>*If you aren't a registered user an account will be created.</small>
+  </div>
+</div>

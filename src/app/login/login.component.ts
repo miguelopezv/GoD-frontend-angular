@@ -3,9 +3,8 @@ import { PlayersService } from './../services/players.service';
 import { Player } from '../interfaces';
 import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { State } from '../interfaces/state.interface';
-import * as PlayerActions from '../actions';
+import { Store, State } from '@ngrx/store';
+import * as PlayerActions from '../actions/player.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -15,19 +14,19 @@ import { Observable } from 'rxjs';
 })
 
 export class LoginComponent implements OnInit {
-  players: Observable<Player[]>;
-  playerNumber: number = 1;
+  players: Observable<any>;
+  playerNumber: number = 0;
   loginForm: FormGroup;
   existingUser: AbstractControl;
 
   constructor(
     private _playersService: PlayersService,
     private _router: Router,
-    private store: Store<State>
+    private _store: Store<State<any>>
   ) {}
 
   ngOnInit() {
-    this.players = this.store.select('playerFeature');
+    this.players = this._store.select('playerFeature');
     this.loginForm = this._createFormGroup();
     this.existingUser = this.loginForm.controls['createdUser'];
   }
@@ -50,7 +49,9 @@ export class LoginComponent implements OnInit {
       .subscribe((player: Player) => this._dispatch(player));
     } else {
       this._playersService.createPlayer(formData)
-      .subscribe((player: Player) => this._dispatch(player));
+      .subscribe((player: Player) => {
+        this._dispatch(player);
+      });
     }
   }
 
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
    * @param player the player to be saved on State
    */
   private _dispatch(player: Player) {
-    this.store.dispatch(new PlayerActions.AddPlayer(player));
+    this._store.dispatch(new PlayerActions.AddPlayer(player));
     this._checkLength();
   }
 
@@ -68,8 +69,8 @@ export class LoginComponent implements OnInit {
    */
   private _checkLength() {
     this.players.subscribe(data => {
-      this. playerNumber = data.length + 1;
-      if (this.playerNumber > 2) { this._router.navigateByUrl('/game'); }
+      this. playerNumber = data.ids.length;
+      if (this.playerNumber === 2) { this._router.navigateByUrl('/game'); }
     });
   }
 
