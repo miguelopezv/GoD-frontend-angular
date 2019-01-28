@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Player } from '../interfaces/player.interface';
+import { Player } from '../interfaces';
 
 export const ADD_PLAYER = '[PLAYER] Add';
 export const RESET_PLAYERS = '[PLAYER] Reset';
