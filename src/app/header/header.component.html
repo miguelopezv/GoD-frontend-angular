@@ -1,6 +1,23 @@
-<h1>Paper, Rocks, Scissors!!</h1>
-<p>{{players[0]?.fullName}}</p>
-<span>partials: {{players[0]?.partials}}</span>
-<p>Racha <small>(racha global)</small></p>
-<p>{{players[1]?.fullName}}</p>
-<span>partials: {{players[1]?.partials}}</span>
+<div class="container">
+  <div class="body">
+    <h1>Game of Drones 🤖</h1>
+    <h2>Become the new emperor!!</h2>
+    <div *ngIf="globalStreak.length == 2" class="partials-container">
+      <div class="player">
+        <div *ngFor="let value of toArray(players[0]?.partials)">
+          <fa-icon class="icon" [icon]="faCrown"></fa-icon>
+        </div>
+        <p>{{players[0]?.fullName}}</p>
+      </div>
+      <div class="streak">
+        <p>{{globalStreak[0]?.wins}} - {{globalStreak[1]?.wins}} <small>Global</small></p>
+      </div>
+      <div class="player">
+        <p>{{players[1]?.fullName}}</p>
+        <div *ngFor="let value of toArray(players[1]?.partials)">
+          <fa-icon class="icon" [icon]="faCrown"></fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
