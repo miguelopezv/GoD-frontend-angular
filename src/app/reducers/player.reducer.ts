@@ -1,5 +1,4 @@
-import { Action } from '@ngrx/store';
-import * as Actions from '../actions/index';
+import * as Actions from '../actions/player.actions';
 import { Player } from '../interfaces';
 
 import { createEntityAdapter, EntityState, EntityAdapter } from '@ngrx/entity';
