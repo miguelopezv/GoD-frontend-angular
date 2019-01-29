@@ -1,29 +1,34 @@
-<div class="container">
-  <div class="individual" *ngFor="let player of players">
-    <div class="box">
-      <div class="player-container">
-        <h2>{{player.fullName}}</h2>
-          <h4>Wins: {{player.wonMatches.length}}</h4>
-          <h4>Loses: {{player.losedMatches.length}}</h4>
+<div *ngIf="streaks?.length; else empty_template" >
+  <div class="container">
+    <div class="individual" *ngFor="let player of players">
+      <div class="box">
+        <div class="player-container">
+          <h2>{{player.fullName}}</h2>
+            <h4>Wins: {{player.wonMatches.length}}</h4>
+            <h4>Loses: {{player.losedMatches.length}}</h4>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="match content">
-  <h3>Global Score: {{globalStreaks[0]?.wins}} - {{globalStreaks[1]?.wins}}</h3>
-    <div class="container">
-      <div class="match" *ngFor="let streak of streaks; let i = index">
-        <p>#{{i +1}}</p>
-        <p> Winner: {{streak.winnerPlayer.firstName}}</p>
-        <p> Loser: {{streak.loserPlayer.firstName}}</p>
-        <p> Date: {{streak.createdAt | date: 'MM-dd-yyyy'}}</p>
+  <div class="match content">
+    <h3>Global Score: {{globalStreaks[0]?.wins}} - {{globalStreaks[1]?.wins}}</h3>
+      <div class="container">
+        <div class="match" *ngFor="let streak of streaks; let i = index">
+          <p>#{{i +1}}</p>
+          <p> Winner: {{streak.winnerPlayer.firstName}}</p>
+          <p> Loser: {{streak.loserPlayer.firstName}}</p>
+          <p> Date: {{streak.createdAt | date: 'MM-dd-yyyy'}}</p>
+        </div>
       </div>
-    </div>
-    <app-pagination
-      (goPrev)="prevPage()"
-      (goNext)="nextPage()"
-      (goPage)="goToPage($event)"
-      [paginationData]="paginationData">
-    </app-pagination>
+      <app-pagination
+        (goPrev)="prevPage()"
+        (goNext)="nextPage()"
+        (goPage)="goToPage($event)"
+        [paginationData]="paginationData">
+      </app-pagination>
+  </div>
 </div>
+<ng-template #empty_template>
+  <h2>There are no stats yet, go and play with your friend a little!!</h2>
+</ng-template>
 <app-footer></app-footer>
