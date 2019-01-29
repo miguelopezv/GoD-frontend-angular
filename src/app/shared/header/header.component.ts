@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Player } from '../interfaces';
+import { Player } from '../../interfaces';
 import { Store, State } from '@ngrx/store';
 import { faCrown } from '@fortawesome/free-solid-svg-icons';
 

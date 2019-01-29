@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store, State } from '@ngrx/store';
-import * as PlayerActions from '../actions/player.actions';
-import * as GameActions from '../actions/game.actions';
+import * as PlayerActions from '../../actions/player.actions';
+import * as GameActions from '../../actions/game.actions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,15 +9,14 @@ import { Router } from '@angular/router';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.sass']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
+  onStats: boolean = this._router.url === '/stats';
 
   constructor(
     private store: Store<State<any>>,
     private _router: Router
   ) {}
 
-  ngOnInit() {
-  }
 
   /**
    * Log out both players, come back to login and reset all States
@@ -33,6 +32,13 @@ export class FooterComponent implements OnInit {
    */
   goToStats() {
     this._router.navigate(['stats']);
+  }
+
+  /**
+   * Navigate to game component
+   */
+  goToGame() {
+    this._router.navigate(['game']);
   }
 
 }

@@ -1,0 +1,7 @@
+<div class="footer-container">
+  <span class="options" (click)="reboot()">End Game</span>
+  <span *ngIf="!onStats; else game_button" class="options" (click)="goToStats()">See game Stats</span>
+  <ng-template #game_button>
+    <span class="options" (click)="goToGame()">Back to the game</span>
+  </ng-template>
+</div>
