@@ -24,7 +24,7 @@ export class StatsService {
     .pipe(tap(data => data));
   }
 
-  getStreakDetail(ids: number[], page: number): Observable<Object> {
+  getStreakDetails(ids: number[], page: number): Observable<Object> {
     let params = new HttpParams();
     ids.forEach((id, i) => params = params.append(`id${i + 1}`, id.toString()));
     params = params.append('page', page.toString());

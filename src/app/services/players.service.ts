@@ -11,7 +11,7 @@ import { Player } from '../interfaces';
 export class PlayersService {
   constructor(private _http: HttpClient) {}
 
-  getPlayer(player: Player): Observable<Player> {
+  getPlayer(player: Partial<Player>): Observable<Player> {
     let params = new HttpParams();
     params = params.append('firstName', player.firstName);
     params = params.append('lastName', player.lastName);
@@ -23,7 +23,7 @@ export class PlayersService {
     }));
   }
 
-  createPlayer(user: Player): Observable<Player> {
+  createPlayer(user: Partial<Player>): Observable<Player> {
     return this._http.post<Player>(`${BACKEND_URL}/player`, {...user})
     .pipe(tap((data: Player) => {
       data.fullName = `${data.firstName} ${data.lastName}`;
