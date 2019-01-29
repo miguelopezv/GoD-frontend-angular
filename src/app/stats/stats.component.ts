@@ -37,7 +37,7 @@ export class StatsComponent implements OnInit {
   }
 
   _getStreakDetails(page: number = 1) {
-    this.statsService.getStreakDetail(this.ids, page)
+    this.statsService.getStreakDetails(this.ids, page)
       .subscribe((data: any) => {
         this.streaks = data.data;
         this.paginationData = { page: data.page, limit: data.pageCount };
