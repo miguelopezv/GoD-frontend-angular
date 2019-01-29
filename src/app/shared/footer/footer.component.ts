@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Store, State } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as PlayerActions from '../../actions/player.actions';
 import * as GameActions from '../../actions/game.actions';
 import { Router } from '@angular/router';
+import { State } from 'src/app/interfaces/state.interface';
 
 @Component({
   selector: 'app-footer',
@@ -13,10 +14,9 @@ export class FooterComponent {
   onStats: boolean = this._router.url === '/stats';
 
   constructor(
-    private store: Store<State<any>>,
+    private store: Store<State>,
     private _router: Router
   ) {}
-
 
   /**
    * Log out both players, come back to login and reset all States
