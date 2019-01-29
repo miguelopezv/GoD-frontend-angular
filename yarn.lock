@@ -321,6 +321,11 @@
   resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-7.1.0.tgz#342b2c99a839eb788f51a8aa9398c5a4e493e35f"
   integrity sha512-blCV88FKOY3FMFoTaOslp5pQu5QTWSCxorU/s2Bl8ThhnolHUsX/Nx3IaEtBr5sWW2z7mY/95qY294iXvfeM9w==
 
+"@ngrx/store-devtools@^7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-7.1.0.tgz#ea5248d616b2bdf7607e9f4a1c80aa4365e0f830"
+  integrity sha512-r0LUFQKxKOhFIO2TBK7k6eoOCT6WGQFXzOFTWwctU7teQgSSpzyUVQfsULfAyFpGN9f1hog9leY/J/EVjdwBQQ==
+
 "@ngrx/store@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-7.1.0.tgz#072f22e062e264c62859f37d9807dfac860f161d"
