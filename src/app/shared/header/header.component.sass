@@ -13,11 +13,15 @@
       font-size: 32px
       font-weight: 600
       margin-bottom: 0
+      @media(max-width: 480px)
+        font-size: 30px
     h2
       color: rgba(245,245,245,.9)
       font-weight: 400
       font-size: 20px
       margin-top: 5px
+      @media(max-width: 480px)
+        font-size: 18px !important
     .partials-container
       display: flex
       align-items: center
@@ -27,5 +31,10 @@
       .player
         display: flex
         align-items: center
+        p
+        @media(max-width: 480px)
+          padding: 0 10px
         .icon
           padding: 0 4px
+          @media(max-width: 480px)
+            padding: 0 10px

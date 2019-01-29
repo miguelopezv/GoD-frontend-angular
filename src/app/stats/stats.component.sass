@@ -1,8 +1,13 @@
-.individual
+.container
+  @media(max-width: 480px)
+    flex-direction: column
+  .individual
   display: flex
   .box
     margin: 20px 10px
     min-width: 190px
+    @media(max-width: 480px)
+      margin: 10px auto
     h2
       text-align: center
 
@@ -14,8 +19,20 @@
   h3
     text-align: center
   .container
-    flex-wrap: wrap;
+    flex-wrap: wrap
     .match
       width: 20%
+      @media(max-width: 480px)
+        width: 80%
+        margin: 0 auto
   app-pagination
     text-align: center
+
+h2
+  text-align: center
+  @media(max-width: 480px)
+    width: 85%
+    margin: 10px auto
+
+  app-footer
+    margin: 10px 0
