@@ -1,14 +1,15 @@
 import { Player } from './../interfaces/player.interface';
 import { TestBed } from '@angular/core/testing';
 import { PlayersService } from './players.service';
+import { Observable, of } from 'rxjs';
 
 class MockPlayersService {
-  getPlayer() {
-    return result;
+  getPlayer(): Observable<Player> {
+    return of(result);
   }
 
-  createPlayer() {
-    return result;
+  createPlayer(): Observable<Player> {
+    return of(result);
   }
 }
 
@@ -38,12 +39,16 @@ describe('PlayersService', () => {
 
   it('should return a Player', async () => {
     const service: PlayersService = TestBed.get(PlayersService);
-    expect(service.getPlayer({firstName: 'Miguel', lastName: 'Lopez'})).toEqual(result);
+    service.getPlayer({firstName: 'Miguel', lastName: 'Lopez'}).subscribe(res => {
+      expect(res).toEqual(result);
+    });
   });
 
   it('should create a Player', async () => {
     const service: PlayersService = TestBed.get(PlayersService);
-    expect(service.createPlayer({firstName: 'Miguel', lastName: 'Lopez'})).toEqual(result);
+    service.createPlayer({firstName: 'Miguel', lastName: 'Lopez'}).subscribe(res => {
+      expect(res).toEqual(result);
+    });
   });
 });
 

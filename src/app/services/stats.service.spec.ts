@@ -1,18 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { StatsService } from './stats.service';
+import { of, Observable } from 'rxjs';
+import { Streak } from '../interfaces';
 
 class MockStatsService {
-  getStreak() {
-    return {
+  getStreak(): Observable<Object> {
+    return of({
       player1: { id: 1, wins: 4 },
       player2: { id: 2, wins: 8 }
-    };
+    });
   }
-  saveGame() {
-    return { winnerPlayer: 6, loserPlayer: 4, id: 13, createdAt: '2019-01-28T01:18:14.415Z' };
+
+  saveGame(): Observable<Object> {
+    return of({ winnerPlayer: 6, loserPlayer: 4, id: 13, createdAt: '2019-01-28T01:18:14.415Z' });
   }
-  getStreakDetails() {
-    return { page: 2, pageCount: 2, data: [] };
+
+  getStreakDetails(): Observable<Object> {
+    return of({ page: 2, pageCount: 2, data: [] });
   }
 }
 
@@ -43,7 +47,9 @@ describe('StatsService', () => {
     };
 
     const service: StatsService = TestBed.get(StatsService);
-    expect(service.getStreak([1, 2])).toEqual(result);
+    service.getStreak([1, 2]).subscribe(res => {
+      expect(res).toEqual(result);
+    });
   });
 
   it('should save a game', async () => {
@@ -55,7 +61,9 @@ describe('StatsService', () => {
     };
 
     const service: StatsService = TestBed.get(StatsService);
-    expect(service.saveGame({body: {winnerPlayer: 6, loserPlayer: 4}})).toEqual(result);
+    service.saveGame({body: {winnerPlayer: 6, loserPlayer: 4}}).subscribe(res => {
+      expect(res).toEqual(result);
+    });
   });
 
   it('should return a Streak with details', async () => {
@@ -66,7 +74,9 @@ describe('StatsService', () => {
     };
 
     const service: StatsService = TestBed.get(StatsService);
-    expect(service.getStreakDetails([1, 2], 1)).toEqual(result);
+    service.getStreakDetails([1, 2], 1).subscribe(res => {
+      expect(res).toEqual(result);
+    });
   });
 
 });

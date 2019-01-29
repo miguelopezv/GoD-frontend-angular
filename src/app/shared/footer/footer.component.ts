@@ -15,7 +15,7 @@ export class FooterComponent {
 
   constructor(
     private store: Store<State>,
-    private _router: Router
+    public _router: Router
   ) {}
 
   /**

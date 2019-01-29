@@ -19,7 +19,7 @@ export class StatsService {
     .pipe(tap(data => data));
   }
 
-  saveGame(body: any): Observable<Streak> {
+  saveGame(body: any): Observable<Object> {
     return this._http.post<Streak>(`${BACKEND_URL}/match`, {body})
     .pipe(tap(data => data));
   }
