@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { HeaderComponent } from './header.component';
+import { StoreModule } from '@ngrx/store';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,9 +9,9 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
-    })
-    .compileComponents();
+      imports: [FontAwesomeModule, StoreModule.forRoot({})],
+      declarations: [HeaderComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
