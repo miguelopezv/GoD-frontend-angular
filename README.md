@@ -5,7 +5,7 @@ This is the frontend for the game Game of drones, a digital two-player Rock, Pap
 ## How to make it work
 
 - Clone or download this repo.
-- navigate to te folder `cd GoD-frontend`.
+- navigate to the folder `cd GoD-frontend`.
 - use `npm install` or `yarn` to install dependencies.
 - run `ng serve` to run the project.
 
