@@ -1,8 +1,6 @@
 import { GameModule } from './game/game.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StatsComponent } from './stats/stats.component';
@@ -35,10 +33,7 @@ export const reducers: ActionReducerMap<any> = {
     SharedModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
-    StoreDevtoolsModule.instrument({
-      maxAge: 5
-    })
+    StoreModule.forRoot(reducers, { metaReducers })
   ],
   providers: [],
   bootstrap: [AppComponent]

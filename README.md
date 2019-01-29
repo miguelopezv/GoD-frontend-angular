@@ -1,27 +1,15 @@
-# Game
+# War of Drones (Frontend)!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.9.
+This is the frontend for the game Game of drones, a digital two-player Rock, Papers, Scissor game. This frontend is the one in charge of the UI and storing in memory all the stats and users for the current round.
 
-## Development server
+## How to make it work
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Clone or download this repo.
+- navigate to te folder `cd GoD-frontend`.
+- use `npm install` or `yarn` to install dependencies.
+- run `ng serve` to run the project.
 
-## Code scaffolding
+frontend will be running on localhost:4200 by default.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+P.S: if you are facing problems due to CORS, you may need to run your browser disabling web security:
+- **Chrome on mac:** open terminal and write `open /Applications/Google\ Chrome.app --args --disable-web-security --user-data-dir`
