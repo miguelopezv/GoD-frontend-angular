@@ -1,9 +1,10 @@
+import { State } from './../interfaces/state.interface';
 import { Component, OnInit } from '@angular/core';
 import { StatsService } from './../services/stats.service';
 import { Streak, Player } from '../interfaces';
 import * as GameOptions from '../shared/options.enum';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Store, State } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as PlayerActions from '../actions/player.actions';
 import * as GameActions from '../actions/game.actions';
 
@@ -23,7 +24,7 @@ export class GameComponent implements OnInit {
 
   constructor(
     private statsService: StatsService,
-    private store: Store<State<any>>
+    private store: Store<State>
   ) {}
 
   ngOnInit() {
