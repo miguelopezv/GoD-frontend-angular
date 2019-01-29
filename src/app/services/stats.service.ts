@@ -23,4 +23,13 @@ export class StatsService {
     return this._http.post<Streak>(`${BACKEND_URL}/match`, {body})
     .pipe(tap(data => data));
   }
+
+  getStreakDetail(ids: number[], page: number): Observable<Object> {
+    let params = new HttpParams();
+    ids.forEach((id, i) => params = params.append(`id${i + 1}`, id.toString()));
+    params = params.append('page', page.toString());
+
+    return this._http.get<Object>(`${BACKEND_URL}/match/detail`, { params: params })
+      .pipe(tap(data => data));
+  }
 }
