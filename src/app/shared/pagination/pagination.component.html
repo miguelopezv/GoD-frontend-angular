@@ -1,0 +1,13 @@
+<div class="container">
+  <div (click)="goPrevPage()" *ngIf="paginationData?.page != 1">
+    <fa-icon class="icon" [icon]="faChevronLeft"></fa-icon>
+  </div>
+    <div *ngFor="let page of pages; let i = index">
+      <p class="page" [class.active]="paginationData?.page == i +1" (click)="goToPage(page +1)">
+        {{page + 1}}
+      </p>
+    </div>
+  <div (click)="goNextPage()" *ngIf="paginationData?.page != paginationData?.limit">
+    <fa-icon class="icon" [icon]="faChevronRight"></fa-icon>
+  </div>
+</div>
