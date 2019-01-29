@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { gameReducer } from '../reducers/game.reducer';
-import { FooterComponent } from '../footer/footer.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [GameComponent, FooterComponent],
+  declarations: [GameComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    SharedModule,
     StoreModule.forFeature('gameFeature', gameReducer)
   ],
   exports: [GameComponent]
