@@ -1,4 +1,4 @@
-# War of Drones (Frontend)!
+# War of Drones (Frontend - Angular)!
 
 This is the frontend for the game Game of drones, a digital two-player Rock, Papers, Scissor game. This frontend is the one in charge of the UI and storing in memory all the stats and users for the current round.
 
