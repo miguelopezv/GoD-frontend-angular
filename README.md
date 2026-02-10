@@ -1,15 +1,27 @@
-# War of Drones (Frontend - Angular)!
+# Angular16
 
-This is the frontend for the game Game of drones, a digital two-player Rock, Papers, Scissor game. This frontend is the one in charge of the UI and storing in memory all the stats and users for the current round.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
 
-## How to make it work
+## Development server
 
-- Clone or download this repo.
-- navigate to the folder `cd GoD-frontend`.
-- use `npm install` or `yarn` to install dependencies.
-- run `ng serve` to run the project.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-frontend will be running on localhost:4200 by default.
+## Code scaffolding
 
-P.S: if you are facing problems due to CORS, you may need to run your browser disabling web security:
-- **Chrome on mac:** open terminal and write `open /Applications/Google\ Chrome.app --args --disable-web-security --user-data-dir`
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
